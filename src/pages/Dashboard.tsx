@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
-import { LogOut, User as UserIcon } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { supabase } from "../lib/supabase";
+import { LogOut, User as UserIcon } from "lucide-react";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -13,9 +13,11 @@ export default function Dashboard() {
   }, []);
 
   const checkUser = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) {
-      navigate('/login');
+      navigate("/login");
     } else {
       setUser(user);
     }
@@ -24,7 +26,7 @@ export default function Dashboard() {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    navigate('/');
+    navigate("/");
   };
 
   if (loading) {
@@ -74,7 +76,11 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">
-            Welcome back, <span className="text-green-400">{user?.user_metadata?.name || 'User'}</span>!
+            Welcome back,{" "}
+            <span className="text-green-400">
+              {user?.user_metadata?.name || "User"}
+            </span>
+            !
           </h1>
           <p className="text-gray-400">Ready to ace your next interview?</p>
         </div>
@@ -98,13 +104,19 @@ export default function Dashboard() {
           <UserIcon className="w-16 h-16 text-green-400 mx-auto mb-4" />
           <h2 className="text-2xl font-bold mb-2">Your Dashboard</h2>
           <p className="text-gray-400 mb-6">
-            This is your personal dashboard. Start practicing with mock interviews,
-            analyze your resume, and get career guidance from our AI mentor.
+            This is your personal dashboard. Start practicing with mock
+            interviews, analyze your resume, and get career guidance from our AI
+            mentor.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-6 py-3 bg-green-500 hover:bg-green-600 rounded-lg font-semibold transition-all transform hover:scale-105">
-              Start Mock Interview
+            <button
+              onClick={() => navigate("/mock-interview-form")}
+              className="px-6 py-3 bg-green-500 hover:bg-green-600 rounded-lg
+											font-semibold transition-all transform hover:scale-105"
+            >
+              StartMock Interview
             </button>
+
             <button className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg font-semibold transition-all">
               Analyze Resume
             </button>
