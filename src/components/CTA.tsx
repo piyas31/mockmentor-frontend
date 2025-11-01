@@ -29,7 +29,7 @@ export default function CTA() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/dashboard')}
             className="group px-10 py-5 bg-green-500 hover:bg-green-600 rounded-lg font-bold text-lg transition-all transform hover:scale-105 flex items-center gap-3 shadow-lg shadow-green-500/50"
           >
             Start Jobs Today
