@@ -1,5 +1,6 @@
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
 
 export default function Hero() {
   const navigate = useNavigate();
@@ -8,6 +9,15 @@ export default function Hero() {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleGetStarted = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      navigate('/dashboard');
+    } else {
+      navigate('/login');
     }
   };
 
@@ -41,7 +51,7 @@ export default function Hero() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
-            onClick={() => navigate('/login')}
+            onClick={handleGetStarted}
             className="group px-8 py-4 bg-green-500 hover:bg-green-600 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center gap-2"
           >
             Get Started Free
